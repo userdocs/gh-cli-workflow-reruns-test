@@ -22,12 +22,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip install zizmor
-          go install github.com/buildkite/terminal-to-html/v3/cmd/terminal-to-html@latest
-
-          zizmor . --gh-token $GITHUB_TOKEN | tee output.txt
 
           printf '%b\n' "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          cat output.txt | terminal-to-html -preview >> $GITHUB_STEP_SUMMARY
+          zizmor . --gh-token $GITHUB_TOKEN >> $GITHUB_STEP_SUMMARY
           printf '%b' "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
 

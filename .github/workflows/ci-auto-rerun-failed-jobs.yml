@@ -29,6 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: "${{ secrets.AUTO_RERUN || github.token }}"
+      COPILOT_CLI: ${{ secrets.COPILOT_CLI }}
+      run_id: ${{ inputs.run_id }}
+      attempts: ${{ inputs.attempts }}
+      retries: ${{ inputs.retries }}
+      github_repo: ${{ inputs.github_repo || github.repository }}
     steps:
       - name: Host - Checkout action ${{ inputs.distinct_id }}
         uses: actions/checkout@v4
@@ -36,12 +41,6 @@ jobs:
           persist-credentials: false
 
       - name: config gh copilot cli summary
-        env:
-            COPILOT_CLI: ${{ secrets.COPILOT_CLI }}
-            attempts: ${{ inputs.attempts }}
-            run_id: ${{ inputs.run_id }}
-            retries: ${{ inputs.retries }}
-            github_repo: ${{ inputs.github_repo || github.repository }}
         if: ${{ env.COPILOT_CLI != '' }}
         run: | # only works with oauth and not PAT https://github.com/github/gh-copilot/issues/1
           unset GITHUB_TOKEN GH_TOKEN

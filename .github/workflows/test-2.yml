@@ -14,14 +14,13 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GH_TOKEN: ${{ github.token }}
       COPILOT_CLI: ${{ secrets.COPILOT_CLI }}
+      run_id: ${{ github.event.inputs.run_id }}
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - name: gh copilot cli part 1
-        env:
-            run_id: ${{ github.event.inputs.run_id }}
         if: ${{ env.COPILOT_CLI != '' }}
         run: |
           # Only works with oauth and not PAT https://github.com/github/gh-copilot/issues/1

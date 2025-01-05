@@ -24,7 +24,7 @@ jobs:
           pip install zizmor
           go install github.com/buildkite/terminal-to-html/v3/cmd/terminal-to-html@latest
 
-          zizmor . --gh-token $GITHUB_TOKEN | terminal-to-html > out.html
+          zizmor . --gh-token $GITHUB_TOKEN | terminal-to-html -preview > out.html
 
           printf '%b\n' "\`\`\`" >> $GITHUB_STEP_SUMMARY
           cat out.html >> $GITHUB_STEP_SUMMARY

@@ -62,7 +62,7 @@ jobs:
       distinct_id: ${{ github.event.inputs.distinct_id }}
       retries: ${{ github.event.inputs.retries || '1' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
       - name: ci-auto-rerun-failed-jobs-action via ${{ env.github_repo || github.repository }}
